@@ -1,0 +1,128 @@
+    <div id="page-inner">
+        <div class="row">
+        	<h1 class="page-header">{{i18n $.Lang "site_config"}}</h1>
+        	<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="/admin/sys?action=list">{{i18n .Lang "site_list"}}</a></li>
+                            <a href="javascript:void(0);" class="btn btn-success pull-right"  data-toggle="modal" data-target="#ModalAddSite">{{i18n .Lang "add_site"}}</a>
+                        </ul>
+                    </div>
+				</div>
+        		<div class="panel-body">
+                    <table class="table-responsive table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{i18n .Lang "site_name"}}</th>
+                            <th class="hidden-xs">{{i18n .Lang "domain"}}</th>
+                            <th class="hidden-xs hidden-sm">{{i18n .Lang "whitelist"}}</th>
+                            <th>{{i18n .Lang "status"}}</th>
+                            <th>{{i18n .Lang "mngm"}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        	{{range .Sys}}
+                        <tr>
+                            <td>{{.Id}}</td>
+                            <td><input type="text" name="Sitename" class="form-control input-lg gomage-change-update" data-url="/admin/update?table=system&id={{.Id}}" value="{{.Sitename}}"></td>
+                            <td class="hidden-xs"><input type="text" name="Host" class="form-control input-lg gomage-change-update" data-url="/admin/update?table=system&id={{.Id}}" value="{{.Host}}"></td>
+                            <td class="hidden-xs hidden-sm"><input type="text" name="Referer" class="form-control input-lg gomage-change-update" data-url="/admin/update?table=system&id={{.Id}}" value="{{.Referer}}"></td>
+                            <td>
+                             {{if eq .Status true}}
+                                <div class="text-success">{{i18n $.Lang "normal"}}</div>
+                            {{else}}
+                            		<div class="text-danger">{{i18n $.Lang "closed"}}</div>
+                            {{end}}
+                            </td>
+                            <td>
+                                <a href="/admin/sys?action=edit&id={{.Id}}" title="" class="gomage-tooltips">{{i18n $.Lang "configuring"}}</a>
+                                {{if eq .Status true}}
+                                <a href="/admin/update?table=system&field=status&value=0&id={{.Id}}" class="gomage-ajax-get">{{i18n $.Lang "close"}}</a>
+                                {{else}}
+                                <a href="/admin/update?table=system&field=status&value=1&id={{.Id}}" class="gomage-ajax-get">{{i18n $.Lang "open"}}</a>
+                                {{end}}
+                                <a href="/admin/del?table=system&id={{.Id}}" class="gomage-ajax-get gomage-confirm text-danger">{{i18n $.Lang "delete"}}</a>
+                                <a href="/admin/clean?sid={{.Id}}" class="gomage-ajax-get gomage-confirm">{{i18n $.Lang "clear_cache"}}</a>
+                            </td>
+                        </tr>
+                        {{end}}
+                        
+                        </tbody>
+                    </table>
+
+                </div>
+        	</div>
+            
+            
+          
+            
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalAddSite" tabindex="-1" role="dialog" aria-labelledby="ModalAddSiteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/admin/sys" id="ModalAddSiteForm" method="post" class="gomage-ajax-form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                        <h4 class="modal-title" id="ModalAddSiteLabel">{{i18n $.Lang "add_site"}}</h4>
+                    </div>
+                    <div class="modal-body">
+                    		<input type="hidden" name="Id" value="0" />
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "site_name"}}</label>
+                            <input type="text" class="form-control input-lg" name="Sitename" placeholder="请输入站点名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "domain"}}</label>
+                            <input type="text" class="form-control input-lg" name="Host" placeholder="请输入站点域名">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "whitelist"}}</label>
+                            <input type="text" class="form-control input-lg" name="Referer" placeholder="开启白名单，则表示启用图片防盗链">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "path_prefix"}}</label>
+                            <input type="text" name="Prefix" class="input-lg form-control" value="{{.Prefix}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "ori_protection"}}</label>
+                            <select name="Protected" class="form-control input-lg">
+                                <option value="false">{{i18n $.Lang "no"}}</option>
+                                <option value="true">{{i18n $.Lang "yes"}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "sep"}}(<small>{{i18n $.Lang "for_example"}}：gomage.cn/sample.jpg+{{i18n $.Lang "sep"}}+{{i18n $.Lang "style_name"}}</small>)</label>
+                            <select name="Segment" class="form-control input-lg">
+                                <option value="@!" >@!({{i18n $.Lang "default"}})</option>
+                                <option value="@" >@({{i18n $.Lang "at"}})</option>
+                                <option value="!" >! ({{i18n $.Lang "exclamation_mark"}})</option>
+                                <option value="/">/ ({{i18n $.Lang "slash"}})</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">{{i18n $.Lang "cache"}}(<small>{{i18n $.Lang "cache_tips"}}</small>)</label>
+                            <select name="IsCache" class="form-control input-lg">
+                                <option value="false">{{i18n $.Lang "no"}}</option>
+                                <option value="true">{{i18n $.Lang "yes"}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-danger btn-lg" data-dismiss="modal">{{i18n $.Lang "cancel"}}</button>
+                        <button type="submit" class="btn btn-success btn-lg">{{i18n $.Lang "submit"}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{{template "footer"}}

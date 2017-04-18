@@ -1,0 +1,49 @@
+﻿    <div id="page-inner">
+        <div class="row">
+        	<h1 class="page-header">{{i18n .Lang "dashboard"}}</h1>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{i18n .Lang "sys_info"}}</div>
+	            <div class="panel-body">
+	                <div class="table-responsive">
+	                    <table class="table table-bordered table-hover">
+	                        <tbody>
+	                        	 <tr>
+	                                <td>{{i18n .Lang "name"}}</td>
+	                                <td>Gomage (Go + image = Gomage) </td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "version"}}</td>
+	                                <td>v1.0</td>
+	                            </tr>
+	                             <tr>
+	                                <td>{{i18n .Lang "official"}}</td>
+	                                <td><a href="http://www.gomage.cn/" target="_blank">http://www.gomage.cn</a></td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "Language"}}</td>
+	                                <td><a href="http://golang.org" target="_blank">Golang</a></td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "framework"}}</td>
+	                                <td><a href="http://beego.me" target="_blank">beego1.7.1</a></td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "author"}}</td>
+	                                <td>皇虫(TruthHun)</td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "email"}}</td>
+	                                <td>TruthHun@QQ.COM</td>
+	                            </tr>
+	                            <tr>
+	                                <td>{{i18n .Lang "acknowledgments"}}</td>
+	                                <td>{{str2html (i18n .Lang "acknowledgments_msg")}}</td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	            </div>
+        </div>
+        </div>
+</div>
+  {{template "footer"}}

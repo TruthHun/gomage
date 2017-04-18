@@ -1,0 +1,80 @@
+    <div id="page-inner">
+        <div class="row">
+        	<h1 class="page-header">{{i18n $.Lang "site_config"}}</h1>
+        	<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="col-md-12" style="padding-left: 0px">
+                        <ul class="nav nav-tabs">
+                            <li><a href="/admin/sys?action=list">{{i18n $.Lang "site_list"}}</a></li>
+                            <li class="active"><a href="javascript:void(0);">{{i18n $.Lang "configuring"}}</a></li>
+                        </ul>
+                    </div>
+				</div>
+        		<div class="panel-body">
+        			<form action="" class="gomage-ajax-form" method="post">
+						{{with .Sys}}
+        				<input type="hidden" name="Id" value="{{.Id}}" />
+        					<div class="form-group">
+							<label for="">{{i18n $.Lang "site_name"}}</label>
+							<input type="text" name="Sitename" class="input-lg form-control" value="{{.Sitename}}">
+						</div>
+						<div class="form-group">
+							<label for="">{{i18n $.Lang "domain"}}</label>
+								<input type="text" name="Host" class="input-lg form-control" value="{{.Host}}">
+						</div>
+						<div class="form-group">
+							<label for="">{{i18n $.Lang "whitelist"}}</label>
+							<input type="text" name="Referer" class="input-lg form-control" value="{{.Referer}}">
+						</div>
+						<div class="form-group">
+							<label for="">{{i18n $.Lang "path_prefix"}}</label>
+							<input type="text" name="Prefix" class="input-lg form-control" value="{{.Prefix}}">
+						</div>
+        				<div class="form-group">
+        					<label for="">{{i18n $.Lang "ori_protection"}}</label>
+							<select name="Protected" class="form-control input-lg">
+								<option value="false" {{if eq .Protected false}}selected="selected"{{end}}>{{i18n $.Lang "no"}}</option>
+								<option value="true" {{if eq .Protected true}}selected="selected"{{end}}>{{i18n $.Lang "yes"}}</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="">{{i18n $.Lang "sep"}}(<small>{{i18n $.Lang "for_example"}}：gomage.cn/sample.jpg+{{i18n $.Lang "sep"}}+{{i18n $.Lang "style_name"}}</small>)</label>
+							<select name="Segment" class="form-control input-lg">
+								<option value="@!" {{if eq .Segment "@!"}}selected="selected"{{end}}>@!({{i18n $.Lang "default"}})</option>
+								<option value="@" {{if eq .Segment "@"}}selected="selected"{{end}}>@({{i18n $.Lang "at"}})</option>
+								<option value="!" {{if eq .Segment "!"}}selected="selected"{{end}}>! ({{i18n $.Lang "exclamation_mark"}})</option>
+								<option value="/" {{if eq .Segment "/"}}selected="selected"{{end}}>/ ({{i18n $.Lang "slash"}})</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="">{{i18n $.Lang "cache"}}(<small>{{i18n $.Lang "cache_tips"}}</small>)</label>
+							<select name="IsCache" class="form-control input-lg">
+								<option value="1" {{if eq .IsCache true}}selected="selected"{{end}}>{{i18n $.Lang "yes"}}</option>
+								<option value="0" {{if eq .IsCache false}}selected="selected"{{end}}>{{i18n $.Lang "no"}}</option>
+							</select>
+						</div>
+
+        				
+
+        				
+					
+					<a href="/admin/sys" class="btn btn-danger btn-lg">{{i18n $.Lang "cancel"}}</a>
+        				<input type="submit" class="btn btn-success btn-lg" value="{{i18n $.Lang "submit"}}"/>
+					{{end}}
+
+        			</form>
+        		</div>
+        	</div>
+            
+            
+          
+            
+            
+            
+            
+        </div>
+    </div>
+ 
+{{template "footer"}}

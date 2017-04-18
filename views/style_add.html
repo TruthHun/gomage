@@ -1,0 +1,139 @@
+<div id="page-inner" class="page-share page-common">
+
+    <div class="row">
+        <h1 class="page-header">{{i18n .Lang "style_mngm"}}</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                {{template "tabs" .}}
+            </div>
+            <div class="panel-body">
+                <div class="col-md-7" style="padding: 0px;;">
+                    <form action="" method="post" class="gomage-ajax-form" data-url="/admin/style?sid={{.Sid}}" id="gomage-add-style">
+                        <input type="hidden" name="Sid" value="{{.Sid}}" />
+                        <input type="hidden" name="Status" value="1">
+                        <div class="form-group">
+                            <label for="">{{i18n .Lang "style_name"}}</label>
+                            <input type="text" name="Title" placeholder="" class="form-control input-lg">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n .Lang "rule_name"}} <span class="text-danger">*</span></label>
+                            <input type="text" name="Rule" required="required" title="{{i18n .Lang "rule_tips"}}" placeholder="{{i18n .Lang "rule_tips"}}" class="form-control input-lg gomage-tooltips">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{i18n .Lang "processing_method"}}</label>
+                            <select name="Method" class="form-control input-lg">
+                                <option value="11">{{i18n .Lang "method11"}}</option>
+                                <option value="12">{{i18n .Lang "method12"}}</option>
+                                <option value="21">{{i18n .Lang "method21"}}</option>
+                                <option value="22">{{i18n .Lang "method22"}}</option>
+                            </select>
+                        </div>
+						<div class="form-group">
+                            <label for="">{{i18n .Lang "zoom"}}</label>
+                            <select name="IsZoom" class="form-control input-lg">
+                                <option value="1">{{i18n .Lang "yes"}}</option>
+                                <option value="0">{{i18n .Lang "no"}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6" style="padding-left: 0px">
+                            <div class="form-group">
+                                <label for="">{{i18n .Lang "width"}}</label>
+                                <input type="number" name="Width" class="form-control input-lg">
+                            </div>
+                        </div>
+                        <div class="col-xs-6" style="padding-left: 0px;padding-right: 0px;">
+                            <div class="form-group">
+                                <label for="">{{i18n .Lang "height"}}</label>
+                                <input type="number" name="Height" class="form-control input-lg">
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="">{{i18n .Lang "out_fmt"}}</label>
+                            <select name="Ext" class="form-control input-lg">
+                                <option value="-">{{i18n .Lang "original"}}</option>
+                                <option value="jpeg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="gif">GIF</option>
+                                <option value="bmp">BMP</option>
+                                <option value="tiff">TIFF</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-10" style="padding-left: 0px">
+                            <div class="form-group">
+                                <label for="">{{i18n .Lang "watermark_path"}}</label>
+                                <input type="text" name="Watermark" class="form-control input-lg">
+                                <small class="help-block">{{i18n .Lang "watermark_tips"}}</small>
+                            </div>
+                        </div>
+                        <div class="col-xs-2" style="padding-right: 0px;text-align: right">
+                            <div class="form-group">
+                                <label for="">{{i18n .Lang "watermark_pos"}}</label>
+                                <input type="hidden" value="9" name="WatermarkPosition" id="gomage-watermark-position">
+                                <div class="gomage-watermark-position">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                    <span>6</span>
+                                    <span>7</span>
+                                    <span>8</span>
+                                    <span class="active">9</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3" style="padding-left: 0px;">
+	                        	<div class="form-group">
+                                <label for="">{{i18n $.Lang "margin_top"}}</label>
+                                <input type="number" class="form-control" name="Top" value="0" />
+                            </div>
+                        </div>
+                        <div class="col-xs-3" style="padding-left: 0px;">
+	                        	<div class="form-group">
+                                <label for="">{{i18n $.Lang "margin_right"}}</label>
+                                <input type="number" class="form-control" name="Right" value="0" />
+                            </div>
+                        </div>
+                        <div class="col-xs-3" style="padding-left: 0px;">
+	                        	<div class="form-group">
+                                <label for="">{{i18n $.Lang "margin_bottom"}}</label>
+                                <input type="number" class="form-control" name="Bottom" value="0" />
+                            </div>
+                        </div>
+                        <div class="col-xs-3" style="padding-left: 0px;">
+	                        	<div class="form-group">
+                                <label for="">{{i18n $.Lang "margin_left"}}</label>
+                                <input type="number" class="form-control" name="Left" value="0" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="padding-left: 0px;">
+                            <div class="form-group">
+                                <a href="/admin/style?sid={{.Sid}}" class="btn btn-danger btn-lg">{{i18n $.Lang "cancel"}}</a>
+                                <input type="submit" class="btn btn-success btn-lg" value="{{i18n $.Lang "submit"}}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <div class="help-block">{{i18n .Lang "preview"}}</div>
+                    <div class="gomage-preview-box">
+                        <img src="/admin/preview" alt="">
+                    </div>
+                    <div class="help-block text-center">
+                        <div class="btn-group">
+                            <a href="/admin/preview" class="btn btn-success gomage-preview-refresh">{{i18n .Lang "refresh_preview"}}</a>
+                            <a href="/admin/preview" class="btn btn-success gomage-preview-original">{{i18n .Lang "original"}}</a>
+                            <a href="/admin/preview" class="btn btn-success gomage-preview-refresh gomage-preview-window">{{i18n .Lang "new_win_open"}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{template "footer"}}

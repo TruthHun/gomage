@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="{{$.Lang}}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{.Title}}-Powered By Gomage</title>
+    <!-- Bootstrap Styles-->
+    <link href="{{.TplStatic}}/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="{{.TplStatic}}/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="{{.TplStatic}}/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="{{.TplStatic}}/css/custom-styles.css" rel="stylesheet" />
+      <link href="{{.TplStatic}}/css/gomage.css?t={{.StaticVersion}}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+    	
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header text-center">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">
+                    <strong>Gomage</strong>
+                    <small class="pull-right"><span class="hidden-xs">Language: </span><a href="/admin/?lang=en" class="gomage-ajax-get {{if eq .Lang "en-US"}}active{{end}}">En</a> | <a href="/admin/?lang=cn" class="gomage-ajax-get {{if eq .Lang "zh-CN"}}active{{end}}">中文</a></small>
+                </span>
+            </div>
+
+          
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>　　
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="javascript:void(0);" data-toggle="modal" data-target="#ModalUserEdit"><i class="fa fa-gear fa-fw"></i> {{i18n .Lang "change_pwd"}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/admin/logout"><i class="fa fa-sign-out fa-fw"></i> {{i18n .Lang "logout"}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        
+        <nav class="navbar-default navbar-side" role="navigation">
+			<!--<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>-->
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                		<li class="visible-xs"><a href="javascript:void(0);">&nbsp;</a></li>
+                    <li>
+                        <a {{if .IsIndex}}class="active-menu"{{end}} href="/admin"><i class="fa fa-dashboard"></i> {{i18n .Lang "dashboard"}}</a>
+                    </li>
+                    <li>
+                        <a {{if .IsSys}}class="active-menu"{{end}} href="/admin/sys"><i class="fa fa-cogs"></i> {{i18n .Lang "site_config"}}</a>
+                    </li>
+                    <li>
+                        <a {{if .IsStyle}}class="active-menu"{{end}} href="/admin/style"><i class="fa fa-truck"></i> {{i18n .Lang "style_mngm"}}</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+       
+       <div id="page-wrapper">
+       		<div id="page-inner">
+       			{{.LayoutContent}}
+       		</div>
+       </div>
+    </div>
+	<footer>
+		
+    <div class="modal fade" id="ModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="ModalUserEditLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="/admin/update_pwd" method="post" class="gomage-ajax-form">
+				<div class="modal-content">
+                    <input type="hidden" name="uid" value="{{$.Uid}}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="ModalUserEditLabel">{{i18n .Lang "change_pwd"}}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="">{{i18n .Lang "old_pwd"}}</label>
+							<input type="password" class="form-control" name="password_old" value="" />
+						</div>
+						<div class="form-group">
+							<label for="">{{i18n .Lang "new_pwd"}}</label>
+							<input type="password" class="form-control" name="password_new" value="" />
+						</div>
+						<div class="form-group">
+							<label for="">{{i18n .Lang "con_pwd"}}</label>
+							<input type="password" required="required" class="form-control" name="password_ensure" value="" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{i18n .Lang "cancel_changes"}}</button>
+						<button type="submit" class="btn btn-success">{{i18n .Lang "submit_changes"}}</button>
+					</div>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+    
+    	
+	</footer>
+	<script src="{{.TplStatic}}/js/jquery-1.10.2.js"></script>
+    <script src="{{.TplStatic}}/js/bootstrap.min.js"></script>
+    <script src="{{.TplStatic}}/js/jquery.metisMenu.js"></script>
+    <script src="{{.TplStatic}}/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="{{.TplStatic}}/js/custom-scripts.js?t={{.StaticVersion}}"></script>
+    <script src="{{.TplStatic}}/js/gomage.js?t={{.StaticVersion}}" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

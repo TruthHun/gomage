@@ -1,0 +1,29 @@
+{{define "tabs"}}
+<div class="form-group col-md-4" style="padding-left: 0px;">
+	<select id="SiteOption" data-url="/admin/style?action={{.Action}}" name="Sid" class="form-control input-lg">       				
+		{{range .Options}}
+            	<option value="{{.Id}}" {{if eq $.Sid .Id}}selected="selected"{{end}}>{{.Sitename}}({{.Host}})</option>
+        {{end}}
+   </select>
+</div>
+<div class="col-md-8" style="padding-left: 0px;padding-right: 0px;">
+	<ul class="nav nav-tabs">
+	    <li {{if eq .Action "list"}}class="active"{{end}}><a href="/admin/style?action=list&sid={{.Sid}}">{{i18n $.Lang "style_list"}}</a></li>
+	    <li {{if eq .Action "add"}}class="active"{{end}}><a href="/admin/style?action=add&sid={{.Sid}}">{{i18n $.Lang "style_create"}}</a></li>
+	    {{if eq .Action "edit"}}
+	        <li class="active"><a href="javascript:void(0);">{{i18n $.Lang "style_edit"}}</a></li>
+	    {{end}}
+	    {{if eq .Action "list"}}
+	    	<div class="btn-group pull-right">
+				<a href="/admin/style?action=export&sid={{$.Sid}}" class="btn btn-success">{{i18n $.Lang "export_style"}}</a>
+				<form action="/admin/import" target="target" enctype="multipart/form-data" method="post" id="gomage-form-import" style="display: none;">
+					<input type="hidden" name="sid" value="{{$.Sid}}" />
+					<input type="file" name="style" accept="application/json" id="gomage-import" value="" />
+				</form>
+	       		<a href="javascript:void(0);" class="btn btn-success btn-import">{{i18n $.Lang "import_style"}}</a>
+	    	</div>
+		<iframe name="target" id="target" frameborder="0" width="0" height="0"></iframe>
+	    {{end}}
+	</ul>
+</div>
+{{end}}

@@ -1,0 +1,77 @@
+<div id="page-inner" class="page-share page-common">
+
+    <div class="row">
+        <h1 class="page-header">{{i18n .Lang "style_mngm"}}</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{template "tabs" .}}
+            </div>
+            <div class="panel-body">
+                <table class="table-responsive table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{i18n .Lang "style"}}</th>
+                            <th class="hidden-xs hidden-sm">{{i18n .Lang "processing_method"}}</th>
+                            <th class="hidden-xs">{{i18n .Lang "img_size"}}</th>
+                            <th class="hidden-xs hidden-sm">{{i18n .Lang "out_fmt"}}</th>
+                            <th class="hidden-xs hidden-sm">{{i18n $.Lang "status"}}</th>
+                            <th>{{i18n .Lang "mngm"}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{range .Data}}
+                        <tr>
+                            <td>{{.Id}}</td>
+                            <td>
+                                <div>{{i18n $.Lang "name"}}:{{.Title}}</div>
+                                <div>{{i18n $.Lang "rule"}}: <strong class="text-success">{{.Rule}}</strong></div>
+                            </td>
+                            <td class="hidden-xs hidden-sm">
+                                <div>{{Option .Method $.Lang}}</div>
+                            </td>
+                            <td class="hidden-xs">
+                                <div>{{i18n $.Lang "w_h"}}: {{.Width}}x{{.Height}} {{if .Watermark}} | {{i18n $.Lang "water_pos"}}:{{.WatermarkPosition}}{{end}}</div>
+
+                                {{if .Watermark}}
+                                    <div class="text-success">
+                                        {{i18n $.Lang "is_watermark"}}:{{.Watermark}}
+                                    </div>
+                                {{else}}
+                                    <div class="text-danger">
+                                        {{i18n $.Lang "no_watermark"}}
+                                    </div>
+                                {{end}}
+
+                            </td>
+                     
+                            <td class="hidden-xs hidden-sm">{{.Ext}}</td>
+                            <td class="hidden-xs hidden-sm">
+                                {{if eq .Status true}}
+                                <span class="text-success">{{i18n $.Lang "normal"}}</span>
+                                {{else}}
+                                <span class="text-danger">{{i18n $.Lang "closed"}}</span>
+                                {{end}}
+                            </td>
+                            <td>
+                                <a href="/admin/style?id={{.Id}}&action=edit&sid={{$.Sid}}">{{i18n $.Lang "edit"}}</a>
+                                <a href="/admin/preview/?width={{.Width}}&height={{.Height}}&method={{.Method}}&waterpath={{.Watermark}}&waterposition={{.WatermarkPosition}}&zoom={{.IsZoom}}&ext={{.Ext}}&left={{.Left}}&right={{.Right}}&top={{.Top}}&bottom={{.Bottom}}" target="_blank">{{i18n $.Lang "prev"}}</a>
+
+                                {{if eq .Status true}}
+                                    <a href="/admin/update?table=style&field=status&value=0&id={{.Id}}" class="gomage-ajax-get">{{i18n $.Lang "close"}}</a>
+                                {{else}}
+                                    <a href="/admin/update?table=style&field=status&value=1&id={{.Id}}" class="gomage-ajax-get">{{i18n $.Lang "open"}}</a>
+                                {{end}}
+
+                                <a href="/admin/del?table=style&id={{.Id}}" class="gomage-ajax-get gomage-confirm">{{i18n $.Lang "del"}}</a>
+                            </td>
+                        </tr>
+                    {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{template "footer"}}
