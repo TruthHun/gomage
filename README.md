@@ -22,3 +22,4 @@ Gomage uses <a href="https://github.com/astaxie/beego" target="_blank">beego</a>
 
 ### 样式创建和配置页面
 ![样式创建和配置页面](static/images/for-readme/create.png)
+
