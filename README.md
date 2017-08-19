@@ -21,9 +21,9 @@ Gomage uses <a href="https://github.com/astaxie/beego" target="_blank">beego</a>
 4. 进入gomage项目目录，执行 bee run 命令。（注意：如果运行不成功，提示缺少包(package)，请到http://golangtc.com/download/package 下载）
 
 ## 图片访问方式
-1. 比如你给站点www.gomage.cn配置了图片样式，样式的规则名为banner，则访问图片的时候，如图片地址为http://www.gomage.cn/example.jpg，如果加上
-http://www.gomage.cn/example.jpg@!banner，那么程序就会将图片生成你在样式设置里面的banner图片样式规定的宽高以及缩放规则
-2. 获取图片信息，可以通过http://www.gomage.cn/example.jpg@@info的方式，将返回图片的一下基本信息，如图片文件大小、创建时间等。其中@@其实就是一双眼睛，"看"图片info信息
+1. 比如你给站点www.gomage.cn 配置了图片样式，样式的规则名为banner，则访问图片的时候，如图片地址为http://www.gomage.cn/example.jpg ，如果加上
+http://www.gomage.cn/example.jpg@!banner ，那么程序就会将图片生成你在样式设置里面的banner图片样式规定的宽高以及缩放规则
+2. 获取图片信息，可以通过http://www.gomage.cn/example.jpg@@info 的方式，将返回图片的一下基本信息，如图片文件大小、创建时间等。其中@@其实就是一双眼睛，"看"图片info信息
 
 
 ## 页面预览
